@@ -5,12 +5,16 @@ import "./Cart.css";
 
 const Cart = () => {
   const cartItems = useSelector((state) => state.CartReducer.cartItems);
+  const totalPrice=cartItems.reduce((total,iteration)=>{
+    return(total+iteration.price*iteration.quantity)
+  },0)
   const dispatch = useDispatch()
   return (
     <div className="Cart">
       <div className="cartheading">My Cart</div>
       {cartItems.length > 0 ? (
         <>
+        
           {cartItems.map((item) => (
             <div className="cartItem">
               <img src={item.imageURL} className="productImage" />
@@ -23,6 +27,11 @@ const Cart = () => {
               <div className="productprice">{`Rs.${item.quantity*item.price}`}</div>
             </div>
           ))}
+          <div className="cartItem">
+          <div className="cartContainer">
+          <p className="productname">Total Price :Rs.{totalPrice}</p>
+          </div>
+          </div>
         </>
       ) : (
         <>Cart is empty</>

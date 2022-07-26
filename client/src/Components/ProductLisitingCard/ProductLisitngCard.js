@@ -16,6 +16,7 @@ const Card = ({ category }) => {
           <img src={category.imageURL} alt="category" />
         </div>
         <div className="productdescription">{category.description}</div>
+        <p>Available Quantity:{category.stock}</p>
         <div className="productpriceCard">
           <p>{`MRP Rs.${category.price}`}</p>
           <button className="productexploreButton" onClick={handleCartButton}>
