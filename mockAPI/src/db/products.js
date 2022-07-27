@@ -1,4 +1,4 @@
-[
+const products=[
     {
       "name": "Fresho Kiwi - Green, 3 pcs",
       "imageURL": "/static/images/products/fruit-n-veg/kiwi-green.jpg",
@@ -250,3 +250,6 @@
       "id": "5b6c761801a7c3842953089b"
     }
   ]
+
+
+  export default products
