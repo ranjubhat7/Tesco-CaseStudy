@@ -10,7 +10,6 @@ import userRoutes from "./src/routes/user";
 
 const app = express();
 
-userRoutes(app);
 
 // Swagger
 const swaggerOptions = {
@@ -51,6 +50,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cookieParser());
 app.disable("x-powered-by");
+
+userRoutes(app);
+
 
 app.listen(process.env.PORT, async (req, res) => {
   logger.log("info", "server started at " + process.env.PORT);
