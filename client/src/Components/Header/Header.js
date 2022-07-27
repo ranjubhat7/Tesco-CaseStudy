@@ -48,7 +48,7 @@ const Header = () => {
             )}
             <div className="cartimage">
               <button onClick={handleCart}>
-                <img src="static\images\cart.svg" height={50} width={50} />
+                <img src="static\images\cart.svg" height={50} width={50} alt="cartIcon" />
                 <p>{`${cartlength} items`}</p>
               </button>
             </div>

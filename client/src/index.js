@@ -5,8 +5,8 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from "react-redux";
 
-import store from "./Components/Store/store";
-
+import congfigureStore from './Components/Store/store'
+const store=congfigureStore();
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>

@@ -21,7 +21,7 @@ const Banner = () => {
         infiniteLoop
         dynamicHeight
         >
-            {carouseldata && carouseldata.map(item => <div>
+            {carouseldata && carouseldata.map(item => <div key={item.id}>
             <img src={item.bannerImageUrl} alt={item.bannerImageAlt}/>
             </div>)}
         </Carousel>

@@ -1,18 +1,24 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Banner from "../Banner/Banner";
 import Header from "../Header/Header";
 import ProductListingCard from "../ProductLisitingCard/ProductLisitngCard";
+import { fetchProducts } from "../Store/Actions/ProductListActions";
+import {
+  getProdcuctError,
+  getProdcuctList,
+  getProdcuctLoading,
+} from "../Store/Selectors/productSelector";
 import "./ProductListing.css";
 
 const ProductListing = () => {
-  const [productsData, setproductsData] = useState(null);
+  const dispatch = useDispatch();
+  const productsData= useSelector(getProdcuctList);
+  const productLoading = useSelector(getProdcuctLoading);
+  const productError = useSelector(getProdcuctError);
+  console.log(productsData);
   useEffect(() => {
-    const data = async () => {
-      const response = await fetch("http://localhost:8080/products");
-      const responseJson = await response.json();
-      setproductsData(responseJson);
-    };
-    data();
+    dispatch(fetchProducts());
   }, []);
   return (
     <>
@@ -20,12 +26,15 @@ const ProductListing = () => {
       <Banner />
       <div className="productPage">
         <div className="cards">
-          {productsData &&
+          {productLoading === "Success" && productsData ? (
             productsData
               .sort((a, b) => a.order - b.order)
               .map((item) => {
-                return <ProductListingCard category={item} />;
-              })}
+                return <ProductListingCard category={item} key={item.id} />;
+              })
+          ) : (
+            <p>{"Something went wrong!!! Please refresh the Page"}</p>
+          )}
         </div>
       </div>
     </>

@@ -10,8 +10,8 @@ function App() {
       <Header />
       <Router>
         <Routes>
-          <Route path="/" element={<ProductListing/>} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<Login />} />
+          <Route path="/products" element={<ProductListing />} />
         </Routes>
       </Router>
       <Footer />

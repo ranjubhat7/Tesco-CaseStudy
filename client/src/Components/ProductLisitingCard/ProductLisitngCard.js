@@ -2,11 +2,14 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import "./ProductListingCard.css";
 import { addItem } from "../Store/Actions/CartActions";
+import { addToCart } from "../Store/Actions/ProductListActions";
 
 const Card = ({ category }) => {
   const dispatch = useDispatch();
   const handleCartButton = () => {
     dispatch(addItem(category));
+    dispatch(addToCart(category.id))
+    
   };
   return (
     <div key={category.key} className="productcategory">
