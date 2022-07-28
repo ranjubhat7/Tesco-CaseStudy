@@ -37,7 +37,7 @@ export const userLogin = async (req, res) => {
         logger.log("info", "User Logged in " + user);
         const token = generateAccessToken({ userEmail: email });
 
-        logger.log("info", "Token for authorization " + token);
+        logger.log("info", "Token for authorization : " + token);
         res.cookie("token", token, {
           maxAge: 300000,
           httpOnly: true,
@@ -45,7 +45,8 @@ export const userLogin = async (req, res) => {
         return res.status(200).json({
           success: true,
           msg: "Successfully Logged in",
-          user,
+          user:user.email,
+          token
         });
       } else {
         logger.log("error", "Passwords donot match");
