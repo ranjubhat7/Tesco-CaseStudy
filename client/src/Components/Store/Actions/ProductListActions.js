@@ -34,7 +34,7 @@ export function fetchProducts() {
   return (dispatch) => {
     dispatch(fetchProductList());
     axios
-      .get("http://localhost:8080/products")
+      .get("http://localhost:4040/products")
       .then((response) => dispatch(fetchProductListSuccess(response.data)))
       .catch((error) => dispatch(fetchProductListFailed(error.message)));
   };
