@@ -1,11 +1,12 @@
 .Cart{
     height:85vh;
-    width: 30%;
+    width: 35%;
     position: fixed;
     bottom: 0;
-    right: 20px;
+    right: 5px;
     top:100px;
     background-color: #edf0f2;
+    z-index: 3;
 }
 
 .cartheading {

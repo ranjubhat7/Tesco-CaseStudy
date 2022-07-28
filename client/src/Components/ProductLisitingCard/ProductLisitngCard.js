@@ -2,11 +2,14 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import "./ProductListingCard.css";
 import { addItem } from "../Store/Actions/CartActions";
+import { addToCart } from "../Store/Actions/ProductListActions";
 
 const Card = ({ category }) => {
   const dispatch = useDispatch();
   const handleCartButton = () => {
     dispatch(addItem(category));
+    dispatch(addToCart(category.id))
+    
   };
   return (
     <div key={category.key} className="productcategory">
@@ -16,6 +19,7 @@ const Card = ({ category }) => {
           <img src={category.imageURL} alt="category" />
         </div>
         <div className="productdescription">{category.description}</div>
+        <p>Available Quantity:{category.stock}</p>
         <div className="productpriceCard">
           <p>{`MRP Rs.${category.price}`}</p>
           <button className="productexploreButton" onClick={handleCartButton}>

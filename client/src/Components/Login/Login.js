@@ -1,10 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
-import { userSignIn } from "../Store/Actions/UserAction";
+import { signIn, userSignIn } from "../Store/Actions/UserAction";
 import "./Login.css";
-
+import {
+  getLoginError,
+  getLoginLoading,
+  getLoginStatus,
+} from "../Store/Selectors/userSelector";
+import { setError } from "../Store/Actions/UserAction";
 const Login = () => {
   const [userCredentials, setUserCredentials] = useState({
     email: "",
@@ -12,15 +17,17 @@ const Login = () => {
   });
 
   const [errorMessage, setErrorMessage] = useState(null);
-
+  const loginStatus = useSelector(getLoginStatus);
+  let apiError = useSelector(getLoginError);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleChange = (event) => {
     const { name, value } = event.target;
+    if (apiError) dispatch(setError());
+    setErrorMessage(null);
     setUserCredentials({ ...userCredentials, [name]: value });
   };
-
   const handleSubmit = (event) => {
     event.preventDefault();
     const { email, password } = userCredentials;
@@ -29,20 +36,24 @@ const Login = () => {
       setErrorMessage("Invalid Email");
       return;
     }
-    const savedUserCredentials = JSON.parse(
-      localStorage.getItem("userCredentials")
-    );
-    if (
-      savedUserCredentials &&
-      (savedUserCredentials.email !== email ||
-        savedUserCredentials.password !== password)
-    ) {
-      setErrorMessage("Invalid Credentials");
-      return;
-    }
-    dispatch(userSignIn());
-    navigate("/");
+    // const savedUserCredentials = JSON.parse(
+    //   localStorage.getItem("userCredentials")
+    // );
+    // if (
+    //   savedUserCredentials &&
+    //   (savedUserCredentials.email !== email ||
+    //     savedUserCredentials.password !== password)
+    // ) {
+    //   setErrorMessage("Invalid Credentials");
+    //   return;
+    // }
+    dispatch(signIn(userCredentials));
   };
+  useEffect(() => {
+    if (loginStatus.status === 200 && !errorMessage && !apiError) {
+      navigate("/products");
+    }
+  }, [loginStatus]);
   return (
     <>
       <div className="logincontainer">
@@ -79,6 +90,7 @@ const Login = () => {
             <button type="submit" className="loginbutton">
               Login
             </button>
+            <p>{apiError}</p>
           </form>
         </div>
       </div>

@@ -1,59 +1,40 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import Banner from "../Banner/Banner";
 import Header from "../Header/Header";
 import ProductListingCard from "../ProductLisitingCard/ProductLisitngCard";
+import { fetchProducts } from "../Store/Actions/ProductListActions";
+import {
+  getProdcuctError,
+  getProdcuctList,
+  getProdcuctLoading,
+} from "../Store/Selectors/productSelector";
 import "./ProductListing.css";
 
 const ProductListing = () => {
-  const [productsData, setproductsData] = useState(null);
-  const [categoryData, setcategoryData] = useState(null);
-  const [categoryId, setCategoryId] = useState("5b6899953d1a866534f516e2");
-
+  const dispatch = useDispatch();
+  const productsData= useSelector(getProdcuctList);
+  const productLoading = useSelector(getProdcuctLoading);
+  const productError = useSelector(getProdcuctError);
+  console.log(productsData);
   useEffect(() => {
-    const data = async () => {
-      const response = await fetch("http://localhost:8080/products");
-      const responseJson = await response.json();
-      const categories = await fetch("http://localhost:8080/categories");
-      const categoriesJson = await categories.json();
-      console.log(categoriesJson, responseJson);
-      setcategoryData(categoriesJson);
-      setproductsData(responseJson);
-    };
-    data();
+    dispatch(fetchProducts());
   }, []);
   return (
     <>
       <Header />
+      <Banner />
       <div className="productPage">
-        <div className="sidenav">
-          {categoryData &&
-            categoryData
-              .sort((a, b) => a.order - b.order)
-              .map(
-                (item, index) =>
-                  item.enabled && (
-                    <>
-                      <button
-                        className="categoryButton"
-                        onClick={() => setCategoryId(item.id)}
-                      >
-                        {item.name}
-                      </button>
-                      <hr />
-                    </>
-                  )
-              )}
-        </div>
         <div className="cards">
-          {productsData &&
+          {productLoading === "Success" && productsData ? (
             productsData
               .sort((a, b) => a.order - b.order)
               .map((item) => {
-                return (
-                  categoryId === item.category && (
-                    <ProductListingCard category={item} />
-                  )
-                );
-              })}
+                return <ProductListingCard category={item} key={item.id} />;
+              })
+          ) : (
+            <p>{"Something went wrong!!! Please refresh the Page"}</p>
+          )}
         </div>
       </div>
     </>
