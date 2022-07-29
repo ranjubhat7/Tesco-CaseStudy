@@ -33,9 +33,10 @@ export function authenticateToken(req, res, next) {
   jwt.verify(token, process.env.TOKEN_SECRET, (err, user) => {
     if (err)
       return res
-        .status(403)
+        .status(401)
         .json({ success: false, msg: `${err.name} - ${err.message}` });
     next();
   });
 }
+
 
