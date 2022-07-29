@@ -37,6 +37,8 @@ export const signIn = (credentials) => {
     let options = {
       method: "POST",
       url: "http://localhost:4040/userLogin",
+      WithCredentials:true,
+      credentials:"include",
       headers: {
         Accept: "*",
         "Content-Type": "application/json;charset=UTF-8",
@@ -47,6 +49,8 @@ export const signIn = (credentials) => {
       .then((response) => {
         dispatch(userSignInSuccess(response));
       })
-      .catch((error) => dispatch(userSignInFailed(error.message)));
+      .catch((error) => {
+        console.log(error)
+        dispatch(userSignInFailed(error.response.data.msg))});
   };
 };
