@@ -68,9 +68,20 @@ export const userLogin = async (req, res) => {
   }
 };
 
+export const userDeatails=(token)=>{
+  const userEmail=users.filter(user=>user.token===token)
+  return userEmail[0]["email"]
+}
+
 export const getProducts = async (req, res) => {
   res.header("Content-Type", "application/json");
-  res.send(products);
+  const token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRW1haWwiOiJkZWZAZ21haWwuY29tIiwiaWF0IjoxNjU5MDc1MjcxLCJleHAiOjE2NTkwOTMyNzF9.uNjg4UziPtUiXSDX9s0Wi_7JaLX4getHpEZ9S_GI2cs"
+ 
+  const userEmail=userDeatails(token)
+  if(userEmail)
+    res.status(200).json({products,userEmail});
+    else
+    res.status(401).json({success:false,msg:"invalid token"})
 };
 
 
