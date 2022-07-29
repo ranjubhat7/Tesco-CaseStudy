@@ -2,13 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import { signIn, userSignIn } from "../Store/Actions/UserAction";
+import { signIn } from "../Store/Actions/UserAction";
 import "./Login.css";
-import {
-  getLoginError,
-  getLoginLoading,
-  getLoginStatus,
-} from "../Store/Selectors/userSelector";
+import { getLoginError, getLoginStatus } from "../Store/Selectors/userSelector";
 import { setError } from "../Store/Actions/UserAction";
 const Login = () => {
   const [userCredentials, setUserCredentials] = useState({
@@ -27,6 +23,7 @@ const Login = () => {
     if (apiError) dispatch(setError());
     setErrorMessage(null);
     setUserCredentials({ ...userCredentials, [name]: value });
+  console.log(userCredentials)
   };
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -49,8 +46,12 @@ const Login = () => {
     // }
     dispatch(signIn(userCredentials));
   };
+  // useEffect(() => {
+  //   dispatch(userSignOut());
+  // }, []);
   useEffect(() => {
     if (loginStatus.status === 200 && !errorMessage && !apiError) {
+      document.cookie = `token=${loginStatus.data.token}; SameSite=None; Secure`;
       navigate("/products");
     }
   }, [loginStatus]);
@@ -90,7 +91,7 @@ const Login = () => {
             <button type="submit" className="loginbutton">
               Login
             </button>
-            <p>{apiError}</p>
+            <p className="loginError">{apiError || errorMessage || ""}</p>
           </form>
         </div>
       </div>
