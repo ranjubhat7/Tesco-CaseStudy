@@ -26,7 +26,6 @@ export const userLogin = async (req, res) => {
     //Finding user
     const user = await findUser(email);
     console.log(user); //Generating token
-   
 
     if (user) {
       // validating password
@@ -38,6 +37,7 @@ export const userLogin = async (req, res) => {
         const token = generateAccessToken({ userEmail: email });
 
         logger.log("info", "Token for authorization : " + token);
+
         res.cookie("token", token, {
           maxAge: 300000,
           httpOnly: true,
@@ -68,20 +68,19 @@ export const userLogin = async (req, res) => {
   }
 };
 
-export const userDeatails=(token)=>{
-  const userEmail=users.filter(user=>user.token===token)
-  return userEmail[0]["email"]
+export const userDetails=async(req,res)=>{
+const token=req.header("Authorization")
+const usersEmail=users.filter(user=>user.token==token)
+console.log(usersEmail[0]["email"])
+  if(usersEmail.length>0)
+  res.status(200).json({success:true,email:usersEmail[0]["email"]})
+  else
+  res.status(401).json({success:false,msg:"invalid token"})
 }
 
 export const getProducts = async (req, res) => {
   res.header("Content-Type", "application/json");
-  const token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRW1haWwiOiJkZWZAZ21haWwuY29tIiwiaWF0IjoxNjU5MDc1MjcxLCJleHAiOjE2NTkwOTMyNzF9.uNjg4UziPtUiXSDX9s0Wi_7JaLX4getHpEZ9S_GI2cs"
- 
-  const userEmail=userDeatails(token)
-  if(userEmail)
-    res.status(200).json({products,userEmail});
-    else
-    res.status(401).json({success:false,msg:"invalid token"})
+  res.send(products);
 };
 
 
