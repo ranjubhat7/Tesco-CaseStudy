@@ -1,4 +1,4 @@
-import { userLogin,getProducts,getProductById} from "../controllers/user.js";
+import { userLogin,getProducts,getProductById,userDetails} from "../controllers/user.js";
 import { authenticateToken } from "../services/auth.js";
 
 const routes = (app) => {
@@ -6,5 +6,6 @@ const routes = (app) => {
   app.post("/userLogin", userLogin);
   app.get("/products",getProducts)
   app.post("/productById",authenticateToken,getProductById)
+  app.post("/userDetails",userDetails)
 };
 export default routes;
