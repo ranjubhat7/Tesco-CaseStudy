@@ -72,6 +72,7 @@
 {"level":"info","message":"Token for authorization eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRW1haWwiOiJhYmNAZ21haWwuY29tIiwiaWF0IjoxNjU4OTA4NTMxLCJleHAiOjE2NTg5MjY1MzF9.EMjh1gXRBM-vusxWWKOObzZcAezL68DkdUd4CiTiGFU"}
 {"level":"info","message":"server started at 4040"}
 {"level":"info","message":"server started at 4040"}
+<<<<<<< HEAD
 {"level":"info","message":"User Logged in [object Object]"}
 <<<<<<< HEAD
 {"level":"info","message":"Token for authorization eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRW1haWwiOiJhYmNAZ21haWwuY29tIiwiaWF0IjoxNjU4OTIxNDk4LCJleHAiOjE2NTg5Mzk0OTh9.492U0sUpLSic5xGKhzKlc2Rh9nppq9eeF0fADg57Xv4"}
@@ -289,3 +290,6 @@
 {"level":"info","message":"server started at 4040"}
 {"level":"info","message":"User Logged in [object Object]"}
 {"level":"info","message":"Token for authorization : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRW1haWwiOiJhYmNAZ21haWwuY29tIiwiaWF0IjoxNjU5MDk1NzcyLCJleHAiOjE2NTkxMTM3NzJ9.SsmxILeNZ3jf5CGfENb5lSjNapsVlWVdwLC0STp3QlY"}
+=======
+{"level":"info","message":"User Logged in [object Object]"}
+>>>>>>> f404238f2f1a64c0d7c7502fc3337f029ec786d0

@@ -8,7 +8,7 @@ const Header = () => {
   const handleCart = () => {
     setShowCart(!showCart);
   };
-  const userCredentials = JSON.parse(localStorage.getItem("userCredentials"));
+  const userCredentials = localStorage.getItem("userCredentials");
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
   const dispatch = useDispatch();
   const cartlength = useSelector((item) => item.CartReducer.cartItems.length);
@@ -21,16 +21,12 @@ const Header = () => {
             <img src="/static/images/Tesco-Logo.png" alt="logo" width={100} />
           </div>
 
-          <div className="menu">
-            <a href="/" className="leftmenu">
-              Home
-            </a>
-          </div>
+
           <div className="cart">
             {isLoggedIn ? (
               <>
                 <div className="right-menu first-name">
-                  Hi, {userCredentials.firstName}
+                  Hi, {userCredentials}
                 </div>
                 <div
                   className="right-menu"
@@ -41,7 +37,7 @@ const Header = () => {
               </>
             ) : (
               <div className="register">
-                <a href="/login" className="righttmenu">
+                <a href="/" className="righttmenu">
                   Signin
                 </a>
               </div>

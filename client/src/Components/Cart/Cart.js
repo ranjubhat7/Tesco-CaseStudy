@@ -16,8 +16,8 @@ const Cart = () => {
       {cartItems.length > 0 ? (
         <>
           {cartItems.map((item) => (
-            <div className="cartItem">
-              <img src={item.imageURL} className="productImage" />
+            <div className="cartItem" key={item.id}>
+              <img src={item.imageURL} className="productImage" k/>
               <div className="cartcontainer">
                 <p className="productname">{item.name}</p>
                 <button

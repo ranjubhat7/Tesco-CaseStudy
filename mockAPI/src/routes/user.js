@@ -4,7 +4,7 @@ import { authenticateToken } from "../services/auth.js";
 const routes = (app) => {
   //to authenticate user
   app.post("/userLogin", userLogin);
-  app.get("/products",authenticateToken,getProducts)
+  app.get("/products",getProducts)
   app.post("/productById",authenticateToken,getProductById)
   app.post("/userDetails",userDetails)
 };
