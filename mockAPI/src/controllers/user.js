@@ -26,7 +26,6 @@ export const userLogin = async (req, res) => {
     //Finding user
     const user = await findUser(email);
     console.log(user); //Generating token
-   
 
     if (user) {
       // validating password
@@ -38,6 +37,7 @@ export const userLogin = async (req, res) => {
         const token = generateAccessToken({ userEmail: email });
 
         logger.log("info", "Token for authorization : " + token);
+
         res.cookie("token", token, {
           maxAge: 300000,
           httpOnly: true,
@@ -67,6 +67,16 @@ export const userLogin = async (req, res) => {
     res.status(500).json({ success: false, msg: "Internal server error" });
   }
 };
+
+export const userDetails=async(req,res)=>{
+const token=req.header("Authorization")
+const usersEmail=users.filter(user=>user.token==token)
+console.log(usersEmail[0]["email"])
+  if(usersEmail.length>0)
+  res.status(200).json({success:true,email:usersEmail[0]["email"]})
+  else
+  res.status(401).json({success:false,msg:"invalid token"})
+}
 
 export const getProducts = async (req, res) => {
   res.header("Content-Type", "application/json");

@@ -9,3 +9,7 @@ export const getLoginLoading=(state)=>{
 export const getLoginError=(state)=>{
     return state.user.loginError
 }
+
+export const isLoggedIn=(state)=>{
+    return state.user.isLoggedIn
+}

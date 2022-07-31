@@ -13,9 +13,8 @@ import "./ProductListing.css";
 
 const ProductListing = () => {
   const dispatch = useDispatch();
-  const productsData= useSelector(getProdcuctList);
+  const productsData = useSelector(getProdcuctList);
   const productLoading = useSelector(getProdcuctLoading);
-  const productError = useSelector(getProdcuctError);
   console.log(productsData);
   useEffect(() => {
     dispatch(fetchProducts());
