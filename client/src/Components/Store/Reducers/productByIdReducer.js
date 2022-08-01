@@ -21,9 +21,11 @@ const ProductByIdReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         product: [],
-        productError: action.payload,
+        producterror: action.payload,
         productLoading: "Failed",
       };
+    case "clearProductById":
+      return INITIAL_STATE;
     default:
       return state;
   }

@@ -11,5 +11,5 @@ export const getProdcuctError=(state)=>{
 }
 
 export const getProductById=(state)=>{
-    return state.productById.product
+    return state.productById
 }

@@ -13,13 +13,15 @@ export default function useUserEmail() {
         Authorization: localStorage.getItem("token"),
       },
     };
-    axios(options)
-      .then((response) => {
-        setEmail(response.data.email);
-      })
-      .catch((error) => {
-        setEmail("");
-      });
+    if (localStorage.getItem("userCredetntials")) {
+      axios(options)
+        .then((response) => {
+          setEmail(response.data.email);
+        })
+        .catch(() => {
+          setEmail("");
+        });
+    }
   });
 
   return email;

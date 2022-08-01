@@ -1,11 +1,10 @@
-import React from 'react';
+import React from "react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Login from "./Components/Login/Login";
 import ProductListing from "./Components/ProductListing/ProductListing";
 import Header from "./Components/Header/Header";
 import Footer from "./Components/Footer/Footer";
 import ProductDetalis from "./Components/Cart/productPage/productDetalis";
-
 import Protected from "./Components/ProtectedRoute";
 
 function App() {
@@ -19,11 +18,19 @@ function App() {
             path="/products"
             element={
               <Protected>
-                <ProductListing />{" "}
+                <ProductListing />
               </Protected>
             }
           />
-          <Route path="/products/:productId" element={<ProductDetalis />} />
+          <Route
+            path="/products/:productId"
+            element={
+              <Protected>
+                <ProductDetalis />
+              </Protected>
+            }
+          />
+          <Route path="*" element={<Login />} />
         </Routes>
         <Footer />
       </Router>

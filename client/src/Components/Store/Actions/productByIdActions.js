@@ -35,3 +35,9 @@ export function fetchProductByIdAPI(productId) {
       .catch((error) => dispatch(fetchProductLByIdFailed(error.message)));
   };
 }
+
+export const clearProductById = () => {
+  return {
+    type: "clearProductById",
+  };
+};

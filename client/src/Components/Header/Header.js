@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 const Header = () => {
   const [showCart, setShowCart] = useState(false);
   const handleCart = () => {
-    setShowCart(!showCart);
+    if(isLoggedIn) setShowCart(!showCart);
   };
   const userCredentials = localStorage.getItem("userCredentials");
   // const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
@@ -47,14 +47,14 @@ const Header = () => {
                 </a>
               </div>
             )}
-            {isLoggedIn&&(
+           
             <div className="cartimage">
               <button onClick={handleCart}>
-                <img src="static\images\cart.svg" height={50} width={50} alt="cartIcon" />
-                <p>{`${cartlength} items`}</p>
+                <img src="../../../../static/images/cart.svg" height={50} width={50} alt="cartIcon" />
+                {isLoggedIn&&<p>{`${cartlength} items`}</p>}
               </button>
             </div>
-            )}
+           
           </div>
         </div>
       </div>

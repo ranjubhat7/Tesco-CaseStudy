@@ -105,8 +105,5 @@ export const getProductById = async (req, res) => {
   let filteredProduct = products.filter(
     (product) => product.id === req.body.productId
   );
-  if (filteredProduct.length) {
-    filteredProduct = filteredProduct[0];
-  }
   res.send(filteredProduct);
 };

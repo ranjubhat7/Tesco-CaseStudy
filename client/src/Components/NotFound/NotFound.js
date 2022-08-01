@@ -1,8 +1,8 @@
 import React from 'react';
 
-function NotFound(props) {
+function NotFound() {
     return (
-        <div style={{height:"100vh",color:"black",marginTop:"300px"}}>
+        <div className='centerAlign'>
             <h1>Not Found</h1>
         </div>
     );
