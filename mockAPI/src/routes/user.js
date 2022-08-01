@@ -6,7 +6,7 @@ const routes = (app) => {
   app.post("/userLogin", userLogin);
   app.get("/products",getProducts)
   app.get("/banners",getBanners)
-  app.post("/productById",authenticateToken,getProductById)
+  app.post("/productById",getProductById)
   app.post("/userDetails",userDetails)
 };
 export default routes;

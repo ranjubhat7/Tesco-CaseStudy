@@ -1,5 +1,5 @@
 import products from "../db/products";
-import banners from '../db/banners'
+import banners from "../db/banners";
 import users from "../db/user";
 import { generateAccessToken, compare } from "../services/auth";
 import winston from "winston";
@@ -76,18 +76,16 @@ export const userLogin = async (req, res) => {
 };
 
 export const userDetails = async (req, res) => {
-  logger.log("User Details Request")
+  logger.log("User Details Request");
   const token = req.header("Authorization");
   try {
-  
     const usersEmail = await findUserByToken(token);
-    if (usersEmail.length > 0)
-    {
-      logger.log("User Details Request Successful" )
+    if (usersEmail.length > 0) {
+      logger.log("User Details Request Successful");
       res.status(200).json({ success: true, email: usersEmail[0]["email"] });
     }
   } catch {
-    logger.log("User Details Request Failure")
+    logger.log("User Details Request Failure");
     res.status(401).json({ success: false, msg: "invalid token" });
   }
 };
@@ -102,11 +100,13 @@ export const getBanners = async (req, res) => {
   res.send(banners);
 };
 
-
 export const getProductById = async (req, res) => {
   res.header("Content-Type", "application/json");
-  const filteredProduct = products.filter(
-    (product) => product.id === req.body.id
+  let filteredProduct = products.filter(
+    (product) => product.id === req.body.productId
   );
+  if (filteredProduct.length) {
+    filteredProduct = filteredProduct[0];
+  }
   res.send(filteredProduct);
 };
