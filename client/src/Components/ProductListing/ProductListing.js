@@ -1,4 +1,4 @@
-import React, { useEffect} from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Banner from "../Banner/Banner";
 import Header from "../Header/Header";
@@ -14,9 +14,11 @@ const ProductListing = () => {
   const dispatch = useDispatch();
   const productsData = useSelector(getProdcuctList);
   const productLoading = useSelector(getProdcuctLoading);
-  const userEmail=localStorage.getItem("userCredentials")
+  const userEmail = localStorage.getItem("userCredentials");
+  const cartItems = useSelector((state) => state.CartReducer.cartItems);
+
   useEffect(() => {
-    if(userEmail) dispatch(fetchProducts());
+    if (userEmail && !cartItems.length) dispatch(fetchProducts());
   }, [userEmail]);
   return (
     <>

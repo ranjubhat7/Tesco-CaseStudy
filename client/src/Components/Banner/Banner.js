@@ -13,7 +13,6 @@ const Banner = () => {
     };
     data();
   }, []);
-  console.log(carouseldata)
   return (
     <div className="bannerContainer">
       <Carousel showArrows showThumbs={false} infiniteLoop dynamicHeight>

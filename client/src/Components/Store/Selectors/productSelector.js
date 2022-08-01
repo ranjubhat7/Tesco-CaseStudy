@@ -9,3 +9,7 @@ export const getProdcuctLoading=(state)=>{
 export const getProdcuctError=(state)=>{
     return state.products.productError
 }
+
+export const getProductById=(state)=>{
+    return state.productById.product
+}

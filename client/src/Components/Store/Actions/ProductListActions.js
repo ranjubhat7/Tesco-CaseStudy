@@ -10,7 +10,6 @@ export const fetchProductListSuccess = (productList) => {
   };
 };
 export const fetchProductListFailed = (error) => {
-  console.log(error);
   return {
     type: "fetchProductListFailed",
     payload: error,

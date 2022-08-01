@@ -27,7 +27,9 @@ const Login = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     setErrorMessage(null);
-    if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(userCredentials.email)) {
+    if (
+      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(userCredentials.email)
+    ) {
       setErrorMessage("Invalid Email");
       return;
     }
@@ -74,10 +76,11 @@ const Login = () => {
                 value={userCredentials.email}
                 onChange={handleChange}
                 required
+                // placeholder="Enter your Username"
               />
             </div>
             <div className="emailBox">
-              Password
+              <label>Password</label>
               <input
                 type="password"
                 name="password"
@@ -85,6 +88,7 @@ const Login = () => {
                 value={userCredentials.password}
                 onChange={handleChange}
                 required
+                // placeholder="Enter your Password"
               />
             </div>
             <button type="submit" className="loginbutton">
