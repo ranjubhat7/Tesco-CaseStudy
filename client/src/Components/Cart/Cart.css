@@ -1,47 +1,52 @@
-.Cart{
-    height:85vh;
-    width: 35%;
-    position: fixed;
-    bottom: 0;
-    right: 5px;
-    top:100px;
-    background-color: #edf0f2;
-    z-index: 3;
+.Cart {
+  height: 85vh;
+  width: 35%;
+  position: fixed;
+  bottom: 0;
+  right: 5px;
+  top: 100px;
+  background-color: #edf0f2;
+  z-index: 3;
+  overflow-y: scroll;
 }
 
 .cartheading {
-    background-color: black;
-    color: white;
-    width: auto;
-    padding: 20px;
-    font-weight: bold;
+  background-color: black;
+  color: white;
+  width: auto;
+  padding: 20px;
+  font-weight: bold;
 }
 .cartItem {
-    background-color: white;
-    display: flex;
-    margin:10px 0 0 0;
+  background-color: white;
+  display: flex;
+  /* margin: 10px 0 0 0; */
 }
-.productImage{
-    width: 5rem;
-    height: 5rem;
+.productImage {
+  width: 5rem;
+  height: 5rem;
 }
-.cartaction{
-    margin: 10px;
-    background-color: #d62a63;
-    border: none;
-    color: white;
-    border-radius: 20px;
-    width: 20px;
-    justify-content: center;
+.cartaction {
+  margin: 10px;
+  background-color: #d62a63;
+  border: none;
+  color: white;
+  border-radius: 20px;
+  width: 20px;
+  justify-content: center;
+  cursor: pointer;
 }
-.productname{
-    font-weight: bold;
-    font-size: large;
+.productname {
+  font-weight: bold;
+  font-size: large;
 }
-.productprice{
-   margin:auto;
-   margin-right: 2px;
+.productprice {
+  margin: auto;
+  margin-right: 2px;
 }
-.cartcontainer{
-    flex:3;
+.cartcontainer {
+  flex: 3;
+}
+.cartaction:hover{
+    background-color: rgb(116,24,24);
 }

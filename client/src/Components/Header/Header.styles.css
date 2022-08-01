@@ -6,11 +6,8 @@
   align-self: center;
   background-color: white;
   z-index: 2;
-  margin: 0px 5px 0 5px;
 }
-/* .logo{
-  margin: 5px;
-} */
+
 .navbar {
   display: flex;
   height: 100%;
@@ -46,4 +43,14 @@
 .cartimage button {
   display: flex;
   flex-direction: row;
+}
+.logo {
+  margin: 0 12px;
+}
+.cartimage {
+  margin: 0 10px 10px 0px;
+  cursor: pointer;
+}
+.cartimage img {
+  cursor: pointer;
 }

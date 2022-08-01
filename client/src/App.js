@@ -4,6 +4,7 @@ import ProductListing from "./Components/ProductListing/ProductListing";
 import Header from "./Components/Header/Header";
 import Footer from "./Components/Footer/Footer";
 import ProductDetalis from "./Components/Cart/productPage/productDetalis";
+import './App.css'
 
 function App() {
   return (

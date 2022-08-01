@@ -27,7 +27,7 @@ function ProductDetalis(props) {
   console.log(product);
   return (
     <div>
-      <div className="productdetalis">
+      <div className="productdetails">
         <div className="productimage">
           <img src={product.imageURL} alt="product" />
         </div>
