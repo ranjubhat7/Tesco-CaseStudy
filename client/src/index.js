@@ -7,7 +7,6 @@ import { Provider } from "react-redux";
 
 import congfigureStore from "./Components/Store/store";
 const store = congfigureStore();
-console.log(store);
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>

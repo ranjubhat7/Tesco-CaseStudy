@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Banner from "../Banner/Banner";
 import Header from "../Header/Header";
 import ProductListingCard from "../ProductLisitingCard/ProductLisitngCard";
 import { fetchProducts } from "../Store/Actions/ProductListActions";
 import {
-  getProdcuctError,
   getProdcuctList,
   getProdcuctLoading,
 } from "../Store/Selectors/productSelector";
@@ -15,10 +14,10 @@ const ProductListing = () => {
   const dispatch = useDispatch();
   const productsData = useSelector(getProdcuctList);
   const productLoading = useSelector(getProdcuctLoading);
-  console.log(productsData);
+  const userEmail=localStorage.getItem("userCredentials")
   useEffect(() => {
-    dispatch(fetchProducts());
-  }, []);
+    if(userEmail) dispatch(fetchProducts());
+  }, [userEmail]);
   return (
     <>
       <Header />

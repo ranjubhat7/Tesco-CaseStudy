@@ -1,7 +1,8 @@
+import React from "react";
 import { Navigate } from "react-router-dom";
-const Protected = ({ isLoggedIn, reDirectPath, children }) => {
-  if (!isLoggedIn) {
-    return <Navigate to={reDirectPath} replace />;
+const Protected = ({children }) => {
+  if (!localStorage.getItem("userCredentials")) {
+    return <Navigate to={"/"} replace />;
   }
   return children;
 };

@@ -5,7 +5,8 @@ import { addItem } from "../Store/Actions/CartActions";
 import { addToCart } from "../Store/Actions/ProductListActions";
 import { useNavigate } from "react-router";
 
-const Card = ({ category }) => {
+const Card = (props) => {
+  const {category}=props;
   const dispatch = useDispatch();
   const handleCartButton = () => {
     dispatch(addItem(category));

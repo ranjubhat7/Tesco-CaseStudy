@@ -23,13 +23,11 @@ const Login = () => {
     if (apiError) dispatch(setError());
     setErrorMessage(null);
     setUserCredentials({ ...userCredentials, [name]: value });
-  console.log(userCredentials)
   };
   const handleSubmit = (event) => {
     event.preventDefault();
-    const { email, password } = userCredentials;
     setErrorMessage(null);
-    if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
+    if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(userCredentials.email)) {
       setErrorMessage("Invalid Email");
       return;
     }
@@ -46,9 +44,10 @@ const Login = () => {
     // }
     dispatch(signIn(userCredentials));
   };
-  // useEffect(() => {
-  //   dispatch(userSignOut());
-  // }, []);
+  useEffect(() => {
+    if (localStorage.getItem("userCredentials")) navigate("/products");
+  }, []);
+
   useEffect(() => {
     if (loginStatus.status === 200 && !errorMessage && !apiError) {
       document.cookie = `token=${loginStatus.data.token}; SameSite=None; Secure`;

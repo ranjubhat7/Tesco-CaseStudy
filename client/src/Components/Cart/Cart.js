@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { addItem, removeItem } from "../Store/Actions/CartActions";
 import { addToCart, removeFromCart } from "../Store/Actions/ProductListActions";
