@@ -16,8 +16,8 @@ import NotFound from "../../NotFound/NotFound";
 function ProductDetalis() {
   const dispatch = useDispatch();
   const handleCartButton = () => {
-    dispatch(addItem(product));
-    dispatch(addToCart(product.id));
+    dispatch(addItem(product[0]));
+    dispatch(addToCart(product[0].id));
   };
   const selectorProduct = useSelector(getProdcuctList);
   const params = useParams();

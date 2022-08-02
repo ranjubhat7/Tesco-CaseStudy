@@ -4,17 +4,18 @@ import "./Header.styles.css";
 import Cart from "../Cart/Cart";
 import { userSignOut } from "../Store/Actions/UserAction";
 import { useNavigate } from "react-router-dom";
+import { clearCart } from "../Store/Actions/CartActions";
 const Header = () => {
   const [showCart, setShowCart] = useState(false);
   const handleCart = () => {
-    if(isLoggedIn) setShowCart(!showCart);
+    setShowCart(!showCart);
   };
   const userCredentials = localStorage.getItem("userCredentials");
   // const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
-  const isLoggedIn=localStorage.getItem("userCredentials")
+  const isLoggedIn = localStorage.getItem("userCredentials");
   const dispatch = useDispatch();
   const cartlength = useSelector((item) => item.CartReducer.cartItems.length);
-  const navigate=useNavigate();
+  const navigate = useNavigate();
   return (
     <div>
       {showCart && <Cart />}
@@ -24,7 +25,6 @@ const Header = () => {
             <img src="/static/images/Tesco-Logo.png" alt="logo" width={100} />
           </div>
 
-
           <div className="cart">
             {isLoggedIn ? (
               <>
@@ -33,8 +33,10 @@ const Header = () => {
                 </div>
                 <div
                   className="right-menu"
-                  onClick={() => {dispatch(userSignOut())
-                  navigate("/")
+                  onClick={() => {
+                    dispatch(userSignOut());
+                    dispatch(clearCart());
+                    navigate("/");
                   }}
                 >
                   Sign Out
@@ -47,14 +49,18 @@ const Header = () => {
                 </a>
               </div>
             )}
-           
+
             <div className="cartimage">
               <button onClick={handleCart}>
-                <img src="../../../../static/images/cart.svg" height={50} width={50} alt="cartIcon" />
-                {isLoggedIn&&<p>{`${cartlength} items`}</p>}
+                <img
+                  src="../../../../static/images/cart.svg"
+                  height={50}
+                  width={50}
+                  alt="cartIcon"
+                />
+                {isLoggedIn && <p>{`${cartlength} items`}</p>}
               </button>
             </div>
-           
           </div>
         </div>
       </div>
