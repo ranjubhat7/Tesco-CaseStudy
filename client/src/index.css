@@ -18,3 +18,6 @@ code {
   justify-content:center;
   margin: 50%;
 }
+.cursorPointer{
+  cursor: pointer;
+}

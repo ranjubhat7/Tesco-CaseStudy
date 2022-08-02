@@ -56,5 +56,6 @@
   .productdetalis {
     display: flex;
     top: 25%;
+    max-width: 80%;
   }
 }

@@ -28,11 +28,11 @@ const Header = () => {
           <div className="cart">
             {isLoggedIn ? (
               <>
-                <div className="right-menu first-name">
+                <div className="first-name">
                   Hi, {userCredentials}
                 </div>
                 <div
-                  className="right-menu"
+                  className="right-menu cursorPointer"
                   onClick={() => {
                     dispatch(userSignOut());
                     dispatch(clearCart());
