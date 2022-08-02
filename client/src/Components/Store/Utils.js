@@ -1,3 +1,4 @@
+import productData from "../../Data/productList.json";
 export const addItemToCart = (cartItems, cartItemToAdd) => {
   const existingCartItem = cartItems.find(
     (cartItem) => cartItem.id === cartItemToAdd.id
@@ -27,7 +28,11 @@ export const removeItemFromCart = (cartItems, cartItemToRemove) => {
   );
 };
 
-export const getUpdatedProductList = (type, productId, productList) => {
+export const getUpdatedProductList = (
+  type,
+  productId,
+  productList = productData
+) => {
   const selectedProductIndex = productList.findIndex(
     (item) => item.id === productId
   );
@@ -35,7 +40,7 @@ export const getUpdatedProductList = (type, productId, productList) => {
   if (type === "addToCart") {
     productList[selectedProductIndex] = {
       ...productList[selectedProductIndex],
-      stock: Number(productList[selectedProductIndex].stock) - 1,
+      stock: Number(productList[selectedProductIndex]?.stock) - 1,
     };
   } else {
     productList[selectedProductIndex] = {
@@ -43,6 +48,5 @@ export const getUpdatedProductList = (type, productId, productList) => {
       stock: Number(productList[selectedProductIndex].stock) + 1,
     };
   }
-  console.log(productList)
   return productList;
 };

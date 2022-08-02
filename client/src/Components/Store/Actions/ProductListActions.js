@@ -1,4 +1,5 @@
 import axios from "axios";
+
 export const fetchProductList = () => {
   return { type: "fetchProductList" };
 };
@@ -9,7 +10,6 @@ export const fetchProductListSuccess = (productList) => {
   };
 };
 export const fetchProductListFailed = (error) => {
-  console.log(error);
   return {
     type: "fetchProductListFailed",
     payload: error,

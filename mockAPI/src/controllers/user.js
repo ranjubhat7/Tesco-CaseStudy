@@ -1,15 +1,22 @@
 import products from "../db/products";
+import banners from "../db/banners";
 import users from "../db/user";
 import { generateAccessToken, compare } from "../services/auth";
 import winston from "winston";
 import { logConfiguration } from "../config/loggers";
 
-
 const logger = winston.createLogger(logConfiguration);
 
 const findUser = async (email) => {
   const user = users.find((user) => {
-    return user.email == email;
+    return user.email === email;
+  });
+  return user;
+};
+
+const findUserByToken = async (token) => {
+  const user = users.find((user) => {
+    return user.token === token;
   });
   return user;
 };
@@ -26,7 +33,6 @@ export const userLogin = async (req, res) => {
     //Finding user
     const user = await findUser(email);
     console.log(user); //Generating token
-   
 
     if (user) {
       // validating password
@@ -34,10 +40,11 @@ export const userLogin = async (req, res) => {
       let validate = await compare(password, user.password);
 
       if (validate) {
-        logger.log("info", "User Logged in " + user);
+        // logger.log("info", "User Logged in " + user);
         const token = generateAccessToken({ userEmail: email });
 
-        logger.log("info", "Token for authorization : " + token);
+        // logger.log("info", "Token for authorization : " + token);
+
         res.cookie("token", token, {
           maxAge: 300000,
           httpOnly: true,
@@ -45,8 +52,8 @@ export const userLogin = async (req, res) => {
         return res.status(200).json({
           success: true,
           msg: "Successfully Logged in",
-          user:user.email,
-          token
+          user: user.email,
+          token,
         });
       } else {
         logger.log("error", "Passwords donot match");
@@ -68,14 +75,35 @@ export const userLogin = async (req, res) => {
   }
 };
 
+export const userDetails = async (req, res) => {
+  logger.log("User Details Request");
+  const token = req.header("Authorization");
+  try {
+    const usersEmail = await findUserByToken(token);
+    if (usersEmail.length > 0) {
+      logger.log("User Details Request Successful");
+      res.status(200).json({ success: true, email: usersEmail[0]["email"] });
+    }
+  } catch {
+    logger.log("User Details Request Failure");
+    res.status(401).json({ success: false, msg: "invalid token" });
+  }
+};
+
 export const getProducts = async (req, res) => {
   res.header("Content-Type", "application/json");
   res.send(products);
 };
 
-
-export const getProductById=async(req,res)=>{
+export const getBanners = async (req, res) => {
   res.header("Content-Type", "application/json");
-  const filteredProduct=products.filter(product=>product.id===req.body.id)
-  res.send(filteredProduct)
-}
+  res.send(banners);
+};
+
+export const getProductById = async (req, res) => {
+  res.header("Content-Type", "application/json");
+  let filteredProduct = products.filter(
+    (product) => product.id === req.body.productId
+  );
+  res.send(filteredProduct);
+};

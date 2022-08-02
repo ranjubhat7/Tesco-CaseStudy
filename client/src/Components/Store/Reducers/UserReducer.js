@@ -11,12 +11,16 @@ const userReducer = (state = INITIAL_STATE, action) => {
         ...state,
       };
     case "SIGN_IN_SUCCESS":
+      localStorage.setItem("userCredentials",action.payload.data.user);
+      // localStorage.setItem("token",action.payload.data.token);
       return {
         ...state,
         loginError: "",
         loginLoading: "SUCCESS",
+        isLoggedIn: true,
         response: action.payload,
       };
+    
     case "SIGN_IN_FAILED":
       return {
         ...state,
@@ -29,6 +33,8 @@ const userReducer = (state = INITIAL_STATE, action) => {
     case "SET_ERROR":
       return { ...state, loginError: "" };
     case "SIGN_OUT":
+      // localStorage.removeItem("token")
+      localStorage.removeItem("userCredentials");
       return {
         ...state,
         isLoggedIn: false,

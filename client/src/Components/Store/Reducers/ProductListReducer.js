@@ -28,20 +28,26 @@ const ProductListReducer = (state = INITIAL_STATE, action) => {
     case "addToCart":
       return {
         ...state,
-        productList: [...getUpdatedProductList(
-          "addToCart",
-          action.payload,
-          state.productList
-        )],
+        productList: state.productList.length
+          ? [
+              ...getUpdatedProductList(
+                "addToCart",
+                action.payload,
+                state.productList
+              ),
+            ]
+          : [...getUpdatedProductList("addToCart", action.payload)],
       };
     case "removeFromCart":
       return {
         ...state,
-        productList: [...getUpdatedProductList(
-          "removeFromCart",
-          action.payload,
-          state.productList
-        )],
+        productList: [
+          ...getUpdatedProductList(
+            "removeFromCart",
+            action.payload,
+            state.productList
+          ),
+        ],
       };
     default:
       return state;
