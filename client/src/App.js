@@ -1,39 +1,44 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import Login from "./Components/Login/Login";
-import ProductListing from "./Components/ProductListing/ProductListing";
-import Header from "./Components/Header/Header";
-import Footer from "./Components/Footer/Footer";
-import ProductDetalis from "./Components/Cart/productPage/productDetalis";
-import './App.css'
-import Protected from "./Components/ProtectedRoute";
-
+import "./App.css";
+const Login = React.lazy(() => import("./Components/Login/Login"));
+const ProductListing = React.lazy(() =>
+  import("./Components/ProductListing/ProductListing")
+);
+const Header = React.lazy(() => import("./Components/Header/Header"));
+const Footer = React.lazy(() => import("./Components/Footer/Footer"));
+const ProductDetails = React.lazy(() =>
+  import("./Components/Cart/productPage/productDetalis")
+);
+const Protected = React.lazy(() => import("./Components/ProtectedRoute"));
 function App() {
   return (
     <div className="App">
       <Router>
-        <Header />
-        <Routes>
-          <Route path="/" element={<Login />} />
-          <Route
-            path="/products"
-            element={
-              <Protected>
-                <ProductListing />
-              </Protected>
-            }
-          />
-          <Route
-            path="/products/:productId"
-            element={
-              <Protected>
-                <ProductDetalis />
-              </Protected>
-            }
-          />
-          <Route path="*" element={<Login />} />
-        </Routes>
-        <Footer />
+        <Suspense fallback={<div>Loading...</div>}>
+          <Header />
+          <Routes>
+            <Route path="/" element={<Login />} />
+            <Route
+              path="/products"
+              element={
+                <Protected>
+                  <ProductListing />
+                </Protected>
+              }
+            />
+            <Route
+              path="/products/:productId"
+              element={
+                <Protected>
+                  <ProductDetails />
+                </Protected>
+              }
+            />
+            <Route path="*" element={<Login />} />
+          </Routes>
+          <Footer />
+        </Suspense>
       </Router>
     </div>
   );

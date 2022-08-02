@@ -6,7 +6,7 @@ import { addToCart } from "../Store/Actions/ProductListActions";
 import { useNavigate } from "react-router";
 
 const Card = (props) => {
-  const {category}=props;
+  const { category } = props;
   const dispatch = useDispatch();
   const handleCartButton = () => {
     dispatch(addItem(category));
@@ -23,9 +23,8 @@ const Card = (props) => {
       <div className="productcontent">
         <div className="productheading">{category.name}</div>
         <div className="productimageClass">
-          <img src={category.imageURL} alt="category" />
+          <img src={category.imageURL} alt="category" loading="lazy" />
         </div>
-        {/* <div className="productdescription">{category.description}</div> */}
         <p>Available Quantity:{category.stock}</p>
         <div className="productpriceCard">
           <p>{`MRP Rs.${category.price}`}</p>

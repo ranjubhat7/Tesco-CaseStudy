@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <div className="footer">
       <p className="footerContent">
-        Copyright &copy; Sabka Bazaar Grocery Supplies Pvt Ltd
+        Copyright &copy; Tesco Pvt Ltd
       </p>
     </div>
   );

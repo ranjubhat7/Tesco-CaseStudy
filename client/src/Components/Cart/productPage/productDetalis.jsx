@@ -40,7 +40,7 @@ function ProductDetalis() {
       {productLoading === "Success" && product.length ? (
         <div className="productdetalis">
           <div className="productimage">
-            <img src={product[0]?.imageURL} alt="product" />
+            <img src={product[0]?.imageURL} alt="product"  loading={"lazy"}/>
           </div>
           <div className="productcontainers">
             <div className="product-headings">{product[0]?.name}</div>
