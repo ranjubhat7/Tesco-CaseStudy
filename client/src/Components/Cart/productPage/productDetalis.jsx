@@ -33,6 +33,19 @@ function ProductDetalis() {
 
   return (
     <div>
+
+      <div className="productdetails">
+        <div className="productimage">
+          <img src={product.imageURL} alt="product" />
+        </div>
+        <div className="productcontainers">
+          <div className="product-headings">{product.name}</div>
+          <div className="product-description">{product.description}</div>
+          <div className="lowerContainer">
+          <p>Available Quantity:{product.stock}</p>
+          <div className="product-price">
+            <p>{`M.R.P.:	₹  ${product.price}`}</p>
+            <button className="product-Button" onClick={handleCartButton}>Buy Now</button>
       {productLoading === "Loading" && <h1 className="centerAlign">Loading</h1>}
       {productLoading === "Failed" && (
         <p className="centerAlign">{producterror}</p>

@@ -4,13 +4,21 @@
   padding: 20px 30px 40px;
   margin: 10px;
   justify-content: center;
-  width: 200px;
+  width: 240px;
   height: auto;
 }
+/* @media(max-width:1560px){
+  .productcategory{
+    width: 200px;
+  }
+} */
 .productimageClass img {
   height: 150px;
   width: 150px;
   flex: 1;
+}
+.productimageClass img:hover{
+  transform: scale(1.05);
 }
 .productcontent {
   display: flex;
@@ -30,9 +38,11 @@
 }
 .productexploreButton {
   background-color: #d62a63;
-  color: white;
-  /* border: none; */
+  color:#fff;
+  border: none;
   cursor: pointer;
+  border-radius: 4px;
+  padding: 4px;
 }
 .productexploreButton:hover {
   background-color: rgb(116, 24, 24);
