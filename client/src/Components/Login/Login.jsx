@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import { clearLoginResponse, signIn } from "../Store/Actions/UserAction";
+import { signIn } from "../Store/Actions/UserAction";
 import "./Login.css";
 import { getLoginError, getLoginStatus } from "../Store/Selectors/userSelector";
 import { setError } from "../Store/Actions/UserAction";
@@ -46,7 +46,7 @@ const Login = () => {
       document.cookie = `token=${loginStatus.data.token}; SameSite=None; Secure`;
       navigate("/products");
     }
-    return () => dispatch(clearLoginResponse());
+ 
   }, [loginStatus]);
   return (
     <>
