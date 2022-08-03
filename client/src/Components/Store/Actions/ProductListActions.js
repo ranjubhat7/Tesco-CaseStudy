@@ -34,8 +34,10 @@ export function fetchProducts() {
   return (dispatch) => {
     dispatch(fetchProductList());
     axios
-      .get("http://localhost:4040/products")
+      .get("http://localhost:4040/products", { withCredentials: true })
       .then((response) => dispatch(fetchProductListSuccess(response.data)))
-      .catch((error) => dispatch(fetchProductListFailed(error.message)));
+      .catch((error) => {
+        dispatch(fetchProductListFailed(error));
+      });
   };
 }

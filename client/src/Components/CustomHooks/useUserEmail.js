@@ -1,28 +1,38 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { getCookie } from "../Store/Utils";
 
 export default function useUserEmail() {
   const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState("Loading");
+  const [error, setError] = useState("");
   useEffect(() => {
     let options = {
-      method: "POST",
-      url: "http://localhost:4040/userDetails",
+      method: "GET",
+      url: "http://localhost:4040/userDetail",
       headers: {
         Accept: "*",
         "Content-Type": "application/json;charset=UTF-8",
-        Authorization: localStorage.getItem("token"),
+        Authorization: getCookie("token"),
       },
     };
-    if (localStorage.getItem("userCredetntials")) {
-      axios(options)
-        .then((response) => {
-          setEmail(response.data.email);
-        })
-        .catch(() => {
-          setEmail("");
-        });
-    }
-  });
+    axios(options)
+      .then((response) => {
+        setLoading("Success");
+        setEmail(response.data);
+      })
+      .catch((error) => {
+        setLoading("Failed");
+        setError();
+        setEmail(error);
+      });
 
-  return email;
+    return () => {
+      setEmail("");
+      setError("");
+      setLoading("Loading");
+    };
+  }, []);
+
+  return { loading, email, error };
 }

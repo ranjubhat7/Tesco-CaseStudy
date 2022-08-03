@@ -5,9 +5,9 @@ import { authenticateToken } from "../services/auth.js";
 const routes = (app) => {
   //to authenticate user
   app.post("/userLogin", userLogin);
-  app.get("/products",getProducts)
-  app.get("/banners",getBanners)
-  app.post("/productById",getProductById)
+  app.get("/products",authenticateToken,getProducts)
+  app.get("/banners",authenticateToken,getBanners)
+  app.post("/productById",authenticateToken,getProductById)
   app.post("/userDetails",userDetails)
 };
 export default routes;

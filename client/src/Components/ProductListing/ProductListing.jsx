@@ -1,40 +1,45 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Banner from "../Banner/Banner";
-import Header from "../Header/Header";
 import ProductListingCard from "../ProductLisitingCard/ProductLisitngCard";
 import { fetchProducts } from "../Store/Actions/ProductListActions";
-import {
-  getProdcuctList,
-  getProdcuctLoading,
-} from "../Store/Selectors/productSelector";
+import { getProdcuctList } from "../Store/Selectors/productSelector";
+import { getCookie } from "../Store/Utils";
 import "./ProductListing.css";
 
 const ProductListing = () => {
   const dispatch = useDispatch();
-  const productsData = useSelector(getProdcuctList);
-  const productLoading = useSelector(getProdcuctLoading);
-  const userEmail = localStorage.getItem("userCredentials");
+  const { productList, productLoading, productError } =
+    useSelector(getProdcuctList);
   const cartItems = useSelector((state) => state.CartReducer.cartItems);
 
   useEffect(() => {
-    if (userEmail && !cartItems.length) dispatch(fetchProducts());
-  }, [userEmail]);
+    if (getCookie("token") && !cartItems.length) dispatch(fetchProducts());
+  }, []);
+
+  useEffect(() => {
+    if (getCookie("token") && productError?.response?.status === 401)
+      document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+  }, [productError]);
+
   return (
     <>
-      <Header />
       <Banner />
       <div className="productPage">
         <div className="cards">
-          {productLoading === "Success" && productsData ? (
-            productsData
+          {productLoading === "Success" &&
+            productList &&
+            productList
               .sort((a, b) => a.order - b.order)
               .map((item) => {
                 return <ProductListingCard category={item} key={item.id} />;
-              })
-          ) : (
-            <p>{"Something went wrong!!! Please refresh the Page"}</p>
-          )}
+              })}
+          {productLoading === "Failed" &&
+            (productError.response.status === 401 ? (
+              <p>Please logout and login back</p>
+            ) : (
+              <p>{"Something went wrong!!! Please refresh the Page"}</p>
+            ))}
         </div>
       </div>
     </>

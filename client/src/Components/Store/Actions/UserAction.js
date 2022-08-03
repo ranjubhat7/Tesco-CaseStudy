@@ -31,6 +31,12 @@ export const userSignOut = () => {
   };
 };
 
+export const clearLoginResponse = () => {
+  return {
+    type: "CLEAR_LOGIN_RESPONSE",
+  };
+};
+
 export const signIn = (credentials) => {
   return (dispatch) => {
     dispatch(userSignIn());

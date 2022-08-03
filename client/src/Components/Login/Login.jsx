@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import { signIn } from "../Store/Actions/UserAction";
+import { clearLoginResponse, signIn } from "../Store/Actions/UserAction";
 import "./Login.css";
 import { getLoginError, getLoginStatus } from "../Store/Selectors/userSelector";
 import { setError } from "../Store/Actions/UserAction";
+import { getCookie } from "../Store/Utils";
+
 const Login = () => {
   const [userCredentials, setUserCredentials] = useState({
     email: "",
@@ -33,21 +35,10 @@ const Login = () => {
       setErrorMessage("Invalid Email");
       return;
     }
-    // const savedUserCredentials = JSON.parse(
-    //   localStorage.getItem("userCredentials")
-    // );
-    // if (
-    //   savedUserCredentials &&
-    //   (savedUserCredentials.email !== email ||
-    //     savedUserCredentials.password !== password)
-    // ) {
-    //   setErrorMessage("Invalid Credentials");
-    //   return;
-    // }
     dispatch(signIn(userCredentials));
   };
   useEffect(() => {
-    if (localStorage.getItem("userCredentials")) navigate("/products");
+    if (getCookie("token")) navigate("/products");
   }, []);
 
   useEffect(() => {
@@ -55,6 +46,7 @@ const Login = () => {
       document.cookie = `token=${loginStatus.data.token}; SameSite=None; Secure`;
       navigate("/products");
     }
+    return () => dispatch(clearLoginResponse());
   }, [loginStatus]);
   return (
     <>

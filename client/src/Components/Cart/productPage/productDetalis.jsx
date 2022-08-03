@@ -13,34 +13,47 @@ import {
   fetchProductByIdAPI,
 } from "../../Store/Actions/productByIdActions";
 import NotFound from "../../NotFound/NotFound";
+import { getCookie } from "../../Store/Utils";
 function ProductDetalis() {
   const dispatch = useDispatch();
   const handleCartButton = () => {
     dispatch(addItem(product[0]));
     dispatch(addToCart(product[0].id));
   };
-  const selectorProduct = useSelector(getProdcuctList);
+  const { productList } = useSelector(getProdcuctList);
   const params = useParams();
-  const productDataFromList = selectorProduct.filter(
+  const productDataFromList = productList.filter(
     (p) => p.id === params.productId
   );
-  const { product, productLoading, producterror } = useSelector(getProductById);
+  const { product, productLoading, productError } = useSelector(getProductById);
 
   useEffect(() => {
-    dispatch(fetchProductByIdAPI(params.productId));
+    if (getCookie("token")) {
+      dispatch(fetchProductByIdAPI(params.productId));
+    }
     return () => dispatch(clearProductById());
   }, []);
+  useEffect(() => {
+    if (getCookie("token") && productError?.response?.status === 401)
+      document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+  }, [productError]);
 
+  const authenticationError = productError?.response?.status === 401;
   return (
     <div>
       {productLoading === "Loading" && <h1 className="centerAlign">Loading</h1>}
-      {productLoading === "Failed" && (
-        <p className="centerAlign">{producterror}</p>
-      )}
+      {productLoading === "Failed" &&
+        (authenticationError ? (
+          <p className="centerAlign">Please logout and login back</p>
+        ) : (
+          <p className="centerAlign">
+            {"Something went wrong!!! Please refresh the Page"}
+          </p>
+        ))}
       {productLoading === "Success" && product.length ? (
         <div className="productdetalis">
           <div className="productimage">
-            <img src={product[0]?.imageURL} alt="product"  loading={"lazy"}/>
+            <img src={product[0]?.imageURL} alt="product" loading={"lazy"} />
           </div>
           <div className="productcontainers">
             <div className="product-headings">{product[0]?.name}</div>
@@ -60,7 +73,11 @@ function ProductDetalis() {
           </div>
         </div>
       ) : (
-        <>{productLoading !== "Loading" && <NotFound />}</>
+        <>
+          {productLoading !== "Loading" && productLoading !== "Failed" && (
+            <NotFound />
+          )}
+        </>
       )}
     </div>
   );

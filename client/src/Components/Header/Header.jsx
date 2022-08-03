@@ -5,6 +5,7 @@ import Cart from "../Cart/Cart";
 import { userSignOut } from "../Store/Actions/UserAction";
 import { useNavigate } from "react-router-dom";
 import { clearCart } from "../Store/Actions/CartActions";
+
 const Header = () => {
   const [showCart, setShowCart] = useState(false);
   const handleCart = () => {
@@ -16,6 +17,7 @@ const Header = () => {
   const dispatch = useDispatch();
   const cartlength = useSelector((item) => item.CartReducer.cartItems.length);
   const navigate = useNavigate();
+
   return (
     <div>
       {showCart && <Cart />}
@@ -28,14 +30,14 @@ const Header = () => {
           <div className="cart">
             {isLoggedIn ? (
               <>
-                <div className="first-name">
-                  Hi, {userCredentials}
-                </div>
+                <div className="first-name">Hi, {userCredentials}</div>
                 <div
                   className="right-menu cursorPointer"
                   onClick={() => {
                     dispatch(userSignOut());
                     dispatch(clearCart());
+                    document.cookie =
+                      "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
                     navigate("/");
                   }}
                 >

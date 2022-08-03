@@ -26,13 +26,14 @@ export function fetchProductByIdAPI(productId) {
         Accept: "*",
         "Content-Type": "application/json",
       },
+      withCredentials: true,
       data: { productId },
     };
     axios(options)
       .then((response) => {
         dispatch(fetchProductByIdSuccess(response.data));
       })
-      .catch((error) => dispatch(fetchProductLByIdFailed(error.message)));
+      .catch((error) => dispatch(fetchProductLByIdFailed(error)));
   };
 }
 

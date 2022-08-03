@@ -8,7 +8,9 @@ const Banner = () => {
   const [carouseldata, setCarouselData] = useState(null);
   useEffect(() => {
     const data = async () => {
-      const response = await axios.get("http://localhost:4040/banners");
+      const response = await axios.get("http://localhost:4040/banners", {
+        withCredentials: true,
+      });
       await setCarouselData(response.data);
     };
     data();
@@ -19,7 +21,11 @@ const Banner = () => {
         {carouseldata &&
           carouseldata.map((item) => (
             <div key={item.id}>
-              <img src={item.bannerImageUrl} alt={item.bannerImageAlt} loading={"lazy"} />
+              <img
+                src={item.bannerImageUrl}
+                alt={item.bannerImageAlt}
+                loading={"lazy"}
+              />
             </div>
           ))}
       </Carousel>

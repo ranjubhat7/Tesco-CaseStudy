@@ -1,12 +1,1 @@
-[
-    {
-        "email": "def@gmail.com",
-        "password": "password",
-        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRW1haWwiOiJkZWZAZ21haWwuY29tIiwiaWF0IjoxNjU5MDc1MjcxLCJleHAiOjE2NTkwOTMyNzF9.uNjg4UziPtUiXSDX9s0Wi_7JaLX4getHpEZ9S_GI2cs"
-    },
-    {
-        "email": "abc@gmail.com",
-        "password": "password",
-        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRW1haWwiOiJhYmNAZ21haWwuY29tIiwiaWF0IjoxNjU5NTA4MTExLCJleHAiOjE2NTk1MjYxMTF9.g2rWztELLBO4SpMWhrAe7BfmRkQKNBeRErRU6mhXArY"
-    }
-]
+[{"email":"def@gmail.com","password":"password","token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRW1haWwiOiJkZWZAZ21haWwuY29tIiwiaWF0IjoxNjU5MDc1MjcxLCJleHAiOjE2NTkwOTMyNzF9.uNjg4UziPtUiXSDX9s0Wi_7JaLX4getHpEZ9S_GI2cs"},{"email":"abc@gmail.com","password":"password","token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRW1haWwiOiJhYmNAZ21haWwuY29tIiwiaWF0IjoxNjU5NTE5NDc2LCJleHAiOjE2NTk1Mzc0NzZ9.wNAuXe9zdV_G1noJopA_9YiJvA4Lx3ZVb9ko2ZIhjOs"}]

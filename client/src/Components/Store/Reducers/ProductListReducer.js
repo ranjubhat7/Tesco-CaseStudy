@@ -2,7 +2,7 @@ import { getUpdatedProductList } from "../Utils";
 const INITIAL_STATE = {
   productList: [],
   productLoading: "Loading",
-  producterror: "",
+  productError: "",
 };
 
 const ProductListReducer = (state = INITIAL_STATE, action) => {

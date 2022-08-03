@@ -1,7 +1,7 @@
 const INITIAL_STATE = {
   product: [],
   productLoading: "Loading",
-  producterror: "",
+  productError: "",
 };
 
 const ProductByIdReducer = (state = INITIAL_STATE, action) => {
@@ -21,7 +21,7 @@ const ProductByIdReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         product: [],
-        producterror: action.payload,
+        productError: action.payload,
         productLoading: "Failed",
       };
     case "clearProductById":
