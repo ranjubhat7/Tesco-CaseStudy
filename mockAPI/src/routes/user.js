@@ -1,4 +1,5 @@
-import { userLogin,getProducts,getProductById,userDetails,getBanners} from "../controllers/user.js";
+import { userLogin,getProducts,
+  getProductById,userDetails,getBanners} from "../controllers/user.js";
 import { authenticateToken } from "../services/auth.js";
 
 const routes = (app) => {

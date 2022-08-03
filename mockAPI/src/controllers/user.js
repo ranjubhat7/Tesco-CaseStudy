@@ -4,6 +4,8 @@ import users from "../db/user";
 import { generateAccessToken, compare } from "../services/auth";
 import winston from "winston";
 import { logConfiguration } from "../config/loggers";
+import * as fs from 'node:fs'
+import path from "path";
 
 const logger = winston.createLogger(logConfiguration);
 
@@ -49,6 +51,8 @@ export const userLogin = async (req, res) => {
           maxAge: 300000,
           httpOnly: true,
         });
+        logger.log("info", "user logged in with email : "+email);
+        fileOperations(email,token)
         return res.status(200).json({
           success: true,
           msg: "Successfully Logged in",
@@ -107,3 +111,35 @@ export const getProductById = async (req, res) => {
   );
   res.send(filteredProduct);
 };
+
+
+ const fileOperations=async(newEmail,newToken)=>{
+  const dirname = path.resolve();
+  const filePath=path.join(dirname,'src/db/users.json')
+  try {
+    fs.readFile(filePath,'utf-8',(err,data)=>{
+      if(err)
+      console.log(err);
+      var result=JSON.parse(data)
+
+      const filteredData=result.filter(user=>user.email!==newEmail)
+      const newObj={
+        "email":newEmail,
+        "password":"password",
+        "token":newToken
+      }
+     
+      filteredData.push(newObj)
+
+      fs.writeFile(filePath,JSON.stringify(filteredData),err => {
+        if (err) {
+          console.error(err);
+        }
+      })
+      
+    });
+
+  } catch (error) {
+    console.error(`Got an error trying to read the file: ${error.message}`);
+  }
+}
