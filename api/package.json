@@ -5,7 +5,8 @@
   "description": "Product Catalog",
   "scripts": {
     "test": "jest",
-    "start": "nodemon ./index.js --es-module-specifier-resolution=node --exec babel-node -e js"
+    "start": "nodemon --max-http-header-size=81920 ./index.js --es-module-specifier-resolution=node --exec babel-node -e js"
+
   },
   "keywords": [],
   "author": "",

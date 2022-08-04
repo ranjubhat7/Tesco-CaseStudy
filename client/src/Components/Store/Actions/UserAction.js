@@ -56,7 +56,7 @@ export const signIn = (credentials) => {
         dispatch(userSignInSuccess(response));
       })
       .catch((error) => {
-        dispatch(userSignInFailed(error.response.data.msg));
+        dispatch(userSignInFailed(error?.response?.data?.msg));
       });
   };
 };

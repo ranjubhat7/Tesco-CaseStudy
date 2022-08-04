@@ -1,5 +1,5 @@
 FROM node:latest
-WORKDIR /index
+WORKDIR /
 COPY package.json ./
 COPY package-lock.json ./
 COPY ./ ./

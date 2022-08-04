@@ -5,6 +5,7 @@ import Cart from "../Cart/Cart";
 import { userSignOut } from "../Store/Actions/UserAction";
 import { useNavigate } from "react-router-dom";
 import { clearCart } from "../Store/Actions/CartActions";
+import { getCookie } from "../Store/Utils";
 
 const Header = () => {
   const [showCart, setShowCart] = useState(false);
@@ -12,8 +13,8 @@ const Header = () => {
     setShowCart(!showCart);
   };
   const userCredentials = localStorage.getItem("userCredentials");
-  // const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
-  const isLoggedIn = localStorage.getItem("userCredentials");
+  const isLoggedIn =
+    localStorage.getItem("userCredentials") && getCookie("token");
   const dispatch = useDispatch();
   const cartlength = useSelector((item) => item.CartReducer.cartItems.length);
   const navigate = useNavigate();
