@@ -6,7 +6,7 @@ import cors from "cors";
 import swaggerUI from "swagger-ui-express";
 import swaggerJsDoc from "swagger-jsdoc";
 import cookieParser from "cookie-parser";
-import userRoutes from "./src/routes/user";
+import userRoutes from "./routes/user";
 
 const app = express();
 
