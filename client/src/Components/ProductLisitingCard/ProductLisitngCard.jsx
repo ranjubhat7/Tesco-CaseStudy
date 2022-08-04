@@ -18,7 +18,11 @@ const Card = (props) => {
     <div
       key={category.key}
       className="productcategory"
-      onClick={() => navigate(`${category.id}`)}
+      onClick={(event) => {
+        if (event?.target?.id !== "buynow") {
+          navigate(`${category.id}`);
+        }
+      }}
     >
       <div className="productcontent">
         <div className="productheading">{category.name}</div>
@@ -28,7 +32,11 @@ const Card = (props) => {
         <p>Available Quantity:{category.stock}</p>
         <div className="productpriceCard">
           <p>{`MRP Rs.${category.price}`}</p>
-          <button className="productexploreButton" onClick={handleCartButton}>
+          <button
+            className="productexploreButton"
+            onClick={handleCartButton}
+            id="buynow"
+          >
             Buy Now
           </button>
         </div>
