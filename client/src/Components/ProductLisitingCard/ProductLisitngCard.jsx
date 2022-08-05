@@ -31,7 +31,7 @@ const Card = (props) => {
         </div>
         <p>Available Quantity:{category.stock}</p>
         <div className="productpriceCard">
-          <p>{`MRP Rs.${category.price}`}</p>
+          <p>{`MRP:.₹ .${category.price}`}</p>
           <button
             className="productexploreButton"
             onClick={handleCartButton}
