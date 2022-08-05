@@ -5,7 +5,7 @@ import Cart from "../Cart/Cart";
 import { userSignOut } from "../Store/Actions/UserAction";
 import { useNavigate } from "react-router-dom";
 import { clearCart } from "../Store/Actions/CartActions";
-import { getCookie } from "../Store/Utils";
+import { expireAllCookies, getCookie } from "../Store/Utils";
 
 const Header = () => {
   const [showCart, setShowCart] = useState(false);
@@ -37,8 +37,7 @@ const Header = () => {
                   onClick={() => {
                     dispatch(userSignOut());
                     dispatch(clearCart());
-                    document.cookie =
-                      "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+                    expireAllCookies("token");
                     navigate("/");
                   }}
                 >
