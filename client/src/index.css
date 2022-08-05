@@ -16,7 +16,9 @@ code {
   display: flex;
   align-items: center;
   justify-content:center;
-  margin: 50%;
+  margin: 20%;
+  font-size: 30px;
+  color: red;
 }
 .cursorPointer{
   cursor: pointer;

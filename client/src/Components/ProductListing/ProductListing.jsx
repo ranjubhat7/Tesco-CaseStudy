@@ -26,6 +26,14 @@ const ProductListing = () => {
     <>
       <Banner />
       <div className="productPage">
+        {productLoading === "Failed" &&
+          (productError?.response?.status === 401 ? (
+            <p className="centerAlign">Please signout and signin back!!!</p>
+          ) : (
+            <p className="centerAlign">
+              {"Something went wrong!!! Please refresh the Page"}
+            </p>
+          ))}
         <div className="cards">
           {productLoading === "Success" &&
             productList &&
@@ -34,12 +42,6 @@ const ProductListing = () => {
               .map((item) => {
                 return <ProductListingCard category={item} key={item.id} />;
               })}
-          {productLoading === "Failed" &&
-            (productError.response.status === 401 ? (
-              <p>Please logout and login back</p>
-            ) : (
-              <p>{"Something went wrong!!! Please refresh the Page"}</p>
-            ))}
         </div>
       </div>
     </>

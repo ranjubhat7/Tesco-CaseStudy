@@ -44,7 +44,7 @@ function ProductDetalis() {
       {productLoading === "Loading" && <h1 className="centerAlign">Loading</h1>}
       {productLoading === "Failed" &&
         (authenticationError ? (
-          <p className="centerAlign">Please logout and login back</p>
+          <p className="centerAlign">Please signout and signin back!!!</p>
         ) : (
           <p className="centerAlign">
             {"Something went wrong!!! Please refresh the Page"}
