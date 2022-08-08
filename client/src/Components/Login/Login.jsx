@@ -83,7 +83,7 @@ const Login = () => {
                 // placeholder="Enter your Password"
               />
             </div>
-            <button type="submit" className="loginbutton">
+            <button type="submit" className="loginbutton" id="loginButton" data-testid="loginButton">
               Login
             </button>
             <p className="loginError">{apiError || errorMessage || ""}</p>
